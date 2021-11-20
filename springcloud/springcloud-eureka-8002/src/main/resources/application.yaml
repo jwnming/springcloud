@@ -1,0 +1,14 @@
+server:
+  port: 8002
+
+# Eureka注册中心配置
+eureka:
+  instance:
+    hostname: jwnming.eureka8002.com # 本机名 或 localhost 127.0.0.1；集群映射服务器名
+  client:
+    register-with-eureka: false # false表示不向注册中心注册自己
+    fetch-registry: false  # 为false表示自己为注册中心
+    service-url: # 服务端监控页面
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/,http://jwnming.eureka8000.com:8000/eureka/,http://jwnming.eureka8001.com:8001/eureka/
+  server:
+    enable-self-preservation: false # 关闭自我保护机制，微服务注册断开就剔除，保留(好死不如赖活着)

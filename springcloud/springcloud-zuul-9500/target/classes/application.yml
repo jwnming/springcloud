@@ -1,0 +1,27 @@
+server:
+  port: 9500
+
+spring:
+  application:
+    name: springcloud-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://jwnming.eureka8000.com:8000/eureka/,http://jwnming.eureka8001.com:8001/eureka/,http://jwnming.eureka8002.com:8002/eureka/
+  instance:
+    instance-id: springcloud-zuul-9500
+    prefer-ip-address: true
+
+
+info:
+  app.name: jwnming-springcloud-zuul
+  company.name: jwnming.com
+  desc: 网关服务
+
+zuul:
+  routes:
+    myzuul.serviceId: springcloud-provider-user  # 需要代理的微服务id, 名字自定义，属性必须按照api来
+    myzuul.path: /myzuul/**
+  ignored-services: springcloud-provider-user # 忽略路径通过微服务id访问，只能通过zuul代理路径访问， 配置服务前缀，可以直接写*
+  prefix: /prxzuul  # 设置公共前缀
